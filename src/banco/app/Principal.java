@@ -1,10 +1,14 @@
 package banco.app;
 
-import banco.modelo.Conta;
+import banco.modelo.CaixaEletronico;
+import banco.modelo.ContaEspecial;
+import banco.modelo.ContaInvestimento;
 import banco.modelo.Pessoa;
 
 public class Principal {
     public static void main(String[] args) {
+
+        CaixaEletronico caixaEletronico = new CaixaEletronico();
 
         Pessoa titular1 = new Pessoa();
         titular1.setNome("Marcus Vinicius");
@@ -14,20 +18,18 @@ public class Principal {
         titular2.setNome("Maria Abadia");
         titular2.setDocumento("20000000000");
 
-        Conta minhaConta = new Conta(titular1, 100, 100);
-        Conta suaConta = new Conta(titular2, 101, 101);
-        
-        minhaConta.depositar(150);
-        suaConta.depositar(3000);
+        ContaInvestimento minhaConta = new ContaInvestimento(titular1, 100, 100);
+        ContaEspecial suaConta = new ContaEspecial(titular2, 101, 101, 1000);
 
-        minhaConta.sacar(100);
+        minhaConta.depositar(15000);
+        minhaConta.sacar(1000);
+        minhaConta.creditarRendimentos(.8);
+
+        suaConta.depositar(20_000);
         suaConta.sacar(100);
 
-        System.out.println("Titular: " + minhaConta.getTitular().getNome());
-        System.out.println("Saldo: " + minhaConta.getSaldo());
-
-        System.out.println("Titular: " + suaConta.getTitular().getNome());
-        System.out.println("Saldo: " + suaConta.getSaldo());
-
+        caixaEletronico.imprimirSaldo(minhaConta);
+        System.out.println();
+        caixaEletronico.imprimirSaldo(suaConta);
     }
 }
