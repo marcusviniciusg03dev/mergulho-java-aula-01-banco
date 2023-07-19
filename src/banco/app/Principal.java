@@ -5,6 +5,7 @@ import banco.modelo.ContaInvestimento;
 import banco.modelo.Pessoa;
 import banco.modelo.atm.CaixaEletronico;
 import banco.modelo.pagamento.Boleto;
+import banco.modelo.pagamento.Holerite;
 
 public class Principal {
     public static void main(String[] args) {
@@ -32,9 +33,13 @@ public class Principal {
         suaConta.debitarTarifaMensal();
 
         Boleto boletoEscola = new Boleto(titular2, 200);
+        Holerite salarioFuncionario = new Holerite(titular1, 100, 160);
+
         caixaEletronico.pagar(boletoEscola, minhaConta);
+        caixaEletronico.pagar(salarioFuncionario, minhaConta);
 
         System.out.println("Boleto pago: " + boletoEscola.estaPago());
+        System.out.println("Salário pago: " + salarioFuncionario.estaPago());
 
         caixaEletronico.imprimirSaldo(minhaConta);
         System.out.println();
