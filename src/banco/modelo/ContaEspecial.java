@@ -9,6 +9,10 @@ public class ContaEspecial extends Conta {
         this.valorLimite = valorLimite;
     }
 
+    public void debitarTarifaMensal() {
+        sacar(20);
+    }
+
     @Override
     public double getSaldoDisponivel() {
         return getSaldo() + getValorLimite();

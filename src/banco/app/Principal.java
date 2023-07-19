@@ -1,6 +1,7 @@
 package banco.app;
 
 import banco.modelo.CaixaEletronico;
+import banco.modelo.Conta;
 import banco.modelo.ContaEspecial;
 import banco.modelo.ContaInvestimento;
 import banco.modelo.Pessoa;
@@ -24,9 +25,11 @@ public class Principal {
         minhaConta.depositar(15000);
         minhaConta.sacar(1000);
         minhaConta.creditarRendimentos(.8);
+        minhaConta.debitarTarifaMensal();
 
         suaConta.depositar(20_000);
         suaConta.sacar(100);
+        suaConta.debitarTarifaMensal();
 
         caixaEletronico.imprimirSaldo(minhaConta);
         System.out.println();
