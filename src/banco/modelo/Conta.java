@@ -2,6 +2,8 @@ package banco.modelo;
 
 import java.util.Objects;
 
+import banco.modelo.exceptions.SaldoInsuficienteException;
+
 public abstract class Conta {
     private Pessoa titular;
     private int agencia;
@@ -26,7 +28,7 @@ public abstract class Conta {
         }
 
         if (getSaldoDisponivel() - valor < 0) {
-            throw new IllegalStateException("Saldo insuficiente");
+            throw new SaldoInsuficienteException("Saldo insuficiente");
         }
 
         saldo -= valor;
