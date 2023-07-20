@@ -2,7 +2,7 @@ package banco.modelo.pagamento;
 
 import banco.modelo.Pessoa;
 
-public class Boleto implements DocumentoPagavel {
+public class Boleto implements DocumentoPagavel, DocumentoEstornavel {
     private Pessoa beneficiario;
     private double valor;
     private boolean pago;
@@ -26,5 +26,10 @@ public class Boleto implements DocumentoPagavel {
     @Override
     public void quitarPagamento() {
         pago = true;
+    }
+
+    @Override
+    public void estornarPagamento() {
+        pago = false;
     }
 }
