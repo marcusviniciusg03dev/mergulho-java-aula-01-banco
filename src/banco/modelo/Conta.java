@@ -1,5 +1,6 @@
 package banco.modelo;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import banco.modelo.exceptions.SaldoInsuficienteException;
@@ -8,7 +9,7 @@ public abstract class Conta {
     private Pessoa titular;
     private int agencia;
     private int numero;
-    private double saldo;
+    private BigDecimal saldo = BigDecimal.ZERO;
 
     public Conta(Pessoa titular, int agencia, int numero) {
         Objects.requireNonNull(titular, "Titular é obrigatório");
@@ -18,24 +19,24 @@ public abstract class Conta {
         this.numero = numero;
     }
 
-    public void depositar(double valor) {
-        saldo += valor;
+    public void depositar(BigDecimal valor) {
+        saldo = saldo.add(valor);
     }
 
-    public void sacar(double valor) {
-        if (valor <= 0) {
+    public void sacar(BigDecimal valor) {
+        if (valor.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Valor deve ser maior que 0");
         }
 
-        if (getSaldoDisponivel() - valor < 0) {
+        if (getSaldoDisponivel().subtract(valor).compareTo(BigDecimal.ZERO) < 0) {
             throw new SaldoInsuficienteException("Saldo insuficiente");
         }
 
-        saldo -= valor;
+        saldo = saldo.subtract(valor);
     }
 
-    public void sacar(double valor, double taxaSaque) {
-        sacar(valor + taxaSaque);
+    public void sacar(BigDecimal valor, BigDecimal taxaSaque) {
+        sacar(valor.add(taxaSaque));
     }
 
     public abstract void debitarTarifaMensal();
@@ -64,15 +65,15 @@ public abstract class Conta {
         this.numero = numero;
     }
 
-    public double getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
 
-    public double getSaldoDisponivel() {
+    public BigDecimal getSaldoDisponivel() {
         return getSaldo();
     }
 
