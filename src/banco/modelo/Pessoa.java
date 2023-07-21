@@ -69,8 +69,7 @@ public class Pessoa {
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (object == null) return false;
-        if (this.getClass() != object.getClass()) return false;
+        if (object == null || getClass() != object.getClass()) return false;
         
         return Objects.equals(documento, ((Pessoa) object).documento);
     }
