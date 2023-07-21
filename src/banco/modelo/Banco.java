@@ -3,6 +3,7 @@ package banco.modelo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Banco {
     private List<Conta> contas = new ArrayList<Conta>();
@@ -31,5 +32,15 @@ public class Banco {
 
     public List<Conta> getContas() {
         return contas;
+    }
+
+    public Optional<Conta> buscar(int agencia, int numeroConta) {
+        for (Conta conta : getContas()) {
+            if (conta.getAgencia() == agencia && conta.getNumero() == numeroConta) {
+                return Optional.of(conta);
+            }
+        }
+        
+        return Optional.empty();
     }
 }
